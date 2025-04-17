@@ -12,29 +12,24 @@ export default function Home() {
   // This is the fixed one:
   const [expandedProfile, setExpandedProfile] = useState<Profile | null>(null);
 
-  const profiles = [
-    {
-      name: "Jane Doe",
-      img: "/images/profile1.jpg",
-      blurb: "Jane is a founding member of Corda Verte and specializes in structural inspections."
-    },
-    {
-      name: "John Smith",
-      img: "/images/profile2.jpg",
-      blurb: "John leads operations and brings over a decade of rope access experience."
-    },
-    {
-      name: "Maria Lin",
-      img: "/images/profile3.jpg",
-      blurb: "Maria oversees safety training and co-op coordination."
-    },
-  ];
+ const profiles: Profile[] = [
+  {
+    name: "Jane Doe",
+    img: "/images/profile1.jpg",
+    blurb: "Jane is a founding member of Corda Verte and specializes in structural inspections.",
+  },
+  {
+    name: "John Smith",
+    img: "/images/profile2.jpg",
+    blurb: "John leads operations and brings over a decade of rope access experience.",
+  },
+  {
+    name: "Maria Lin",
+    img: "/images/profile3.jpg",
+    blurb: "Maria oversees safety training and co-op coordination.",
+  },
+];
 
-  const servicesTiles = [
-    { title: "Sprinkler Head Changes", img: "/images/sprinklers.jpg" },
-    { title: "Roof Maintenance", img: "/images/roof.jpg" },
-    { title: "Inspections", img: "/images/inspection.jpg" }
-  ];
 
   const sections = {
    
@@ -105,7 +100,8 @@ That’s the Corda Verte difference.'
             <div
               key={profile.name}
               className="bg-white shadow-md rounded-xl p-4 text-center cursor-pointer hover:scale-105 transition-transform"
-              onClick={() => setExpandedProfile(profile)}
+              onClick={() => setExpandedProfile(profile as Profile)}
+
             >
               <img src={profile.img} alt={profile.name} className="w-full h-48 object-cover rounded-md mb-4" />
               <h4 className="text-lg font-semibold">{profile.name}</h4>
