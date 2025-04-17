@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 
 // Define the Profile type
 type Profile = {
@@ -94,7 +94,7 @@ export default function Home() {
     );
   };
 
-  const sections: { [key: string]: JSX.Element } = {
+  const sections: { [key: string]: React.ReactNode } = {
     home: (
       <>
         <section
