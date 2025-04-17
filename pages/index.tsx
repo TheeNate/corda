@@ -1,8 +1,16 @@
 import { useState } from "react";
 
+type Profile = {
+  name: string;
+  img: string;
+  blurb: string;
+};
+
 export default function Home() {
   const [activeSection, setActiveSection] = useState("home");
-  const [expandedProfile, setExpandedProfile] = useState(null);
+
+  // This is the fixed one:
+  const [expandedProfile, setExpandedProfile] = useState<Profile | null>(null);
 
   const profiles = [
     {
