@@ -1,11 +1,13 @@
 import { useState } from "react";
 
+// Define the Profile type
 type Profile = {
   name: string;
   img: string;
   blurb: string;
 };
 
+// Define the ServiceTile type
 type ServiceTile = {
   title: string;
   img: string;
@@ -13,6 +15,8 @@ type ServiceTile = {
 
 export default function Home() {
   const [activeSection, setActiveSection] = useState("home");
+  
+  // Explicitly type the state with Profile | null to avoid 'never' type inference
   const [expandedProfile, setExpandedProfile] = useState<Profile | null>(null);
 
   // Define the missing servicesTiles array
@@ -29,9 +33,9 @@ export default function Home() {
       title: "NDT Testing",
       img: "/images/services-ndt.jpg",
     },
-    // Add more services as needed
   ];
 
+  // Explicitly type the profiles array
   const profiles: Profile[] = [
     {
       name: "Jane Doe",
@@ -49,6 +53,46 @@ export default function Home() {
       blurb: "Maria oversees safety training and co-op coordination.",
     },
   ];
+
+  // Use a type guard to ensure expandedProfile is valid before accessing properties
+  const renderExpandedProfile = () => {
+    if (!expandedProfile) return null;
+    
+    return (
+      <div className="p-6 md:p-12 max-w-4xl mx-auto">
+        <button onClick={() => setExpandedProfile(null)} className="mb-4 text-sm text-gray-600 hover:underline">
+          ← Back to team
+        </button>
+        <img src={expandedProfile.img} alt={expandedProfile.name} className="w-full h-96 object-cover rounded-xl mb-6" />
+        <h3 className="text-2xl font-bold mb-2">{expandedProfile.name}</h3>
+        <p>{expandedProfile.blurb}</p>
+      </div>
+    );
+  };
+
+  const renderTeamGrid = () => {
+    return (
+      <div className="p-6 md:px-20">
+        <h2 className="text-3xl font-bold text-center mb-8">Our Philosophy</h2>
+        <p className="max-w-4xl mx-auto text-lg text-center mb-12">
+          Corda Verte operates as a co-op — built on shared ownership, shared responsibility, and shared reward.
+          We believe the best work happens when everyone involved has real skin in the game.
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+          {profiles.map((profile: Profile) => (
+            <div
+              key={profile.name}
+              className="bg-white shadow-md rounded-xl p-4 text-center cursor-pointer hover:scale-105 transition-transform"
+              onClick={() => setExpandedProfile(profile)}
+            >
+              <img src={profile.img} alt={profile.name} className="w-full h-48 object-cover rounded-md mb-4" />
+              <h4 className="text-lg font-semibold">{profile.name}</h4>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  };
 
   const sections: { [key: string]: JSX.Element } = {
     home: (
@@ -95,36 +139,10 @@ export default function Home() {
         </div>
       </div>
     ),
-    about: expandedProfile ? (
-      <div className="p-6 md:p-12 max-w-4xl mx-auto">
-        <button onClick={() => setExpandedProfile(null)} className="mb-4 text-sm text-gray-600 hover:underline">
-          ← Back to team
-        </button>
-        <img src={expandedProfile.img} alt={expandedProfile.name} className="w-full h-96 object-cover rounded-xl mb-6" />
-        <h3 className="text-2xl font-bold mb-2">{expandedProfile.name}</h3>
-        <p>{expandedProfile.blurb}</p>
-      </div>
-    ) : (
-      <div className="p-6 md:px-20">
-        <h2 className="text-3xl font-bold text-center mb-8">Our Philosophy</h2>
-        <p className="max-w-4xl mx-auto text-lg text-center mb-12">
-          Corda Verte operates as a co-op — built on shared ownership, shared responsibility, and shared reward.
-          We believe the best work happens when everyone involved has real skin in the game.
-        </p>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-          {profiles.map(profile => (
-            <div
-              key={profile.name}
-              className="bg-white shadow-md rounded-xl p-4 text-center cursor-pointer hover:scale-105 transition-transform"
-              onClick={() => setExpandedProfile(profile)}
-            >
-              <img src={profile.img} alt={profile.name} className="w-full h-48 object-cover rounded-md mb-4" />
-              <h4 className="text-lg font-semibold">{profile.name}</h4>
-            </div>
-          ))}
-        </div>
-      </div>
-    ),
+    
+    // Use the helper functions for the about section
+    about: expandedProfile ? renderExpandedProfile() : renderTeamGrid(),
+    
     contact: (
       <div className="p-6 md:px-20">
         <h2 className="text-3xl font-bold text-center mb-8">Contact Us</h2>
