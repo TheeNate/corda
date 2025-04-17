@@ -6,55 +6,70 @@ type Profile = {
   blurb: string;
 };
 
+type ServiceTile = {
+  title: string;
+  img: string;
+};
+
 export default function Home() {
   const [activeSection, setActiveSection] = useState("home");
-
-  // This is the fixed one:
   const [expandedProfile, setExpandedProfile] = useState<Profile | null>(null);
 
- const profiles: Profile[] = [
-  {
-    name: "Jane Doe",
-    img: "/images/profile1.jpg",
-    blurb: "Jane is a founding member of Corda Verte and specializes in structural inspections.",
-  },
-  {
-    name: "John Smith",
-    img: "/images/profile2.jpg",
-    blurb: "John leads operations and brings over a decade of rope access experience.",
-  },
-  {
-    name: "Maria Lin",
-    img: "/images/profile3.jpg",
-    blurb: "Maria oversees safety training and co-op coordination.",
-  },
-];
+  // Define the missing servicesTiles array
+  const servicesTiles: ServiceTile[] = [
+    {
+      title: "Rope Access",
+      img: "/images/services-rope.jpg",
+    },
+    {
+      title: "Structural Inspections",
+      img: "/images/services-inspection.jpg",
+    },
+    {
+      title: "NDT Testing",
+      img: "/images/services-ndt.jpg",
+    },
+    // Add more services as needed
+  ];
 
+  const profiles: Profile[] = [
+    {
+      name: "Jane Doe",
+      img: "/images/profile1.jpg",
+      blurb: "Jane is a founding member of Corda Verte and specializes in structural inspections.",
+    },
+    {
+      name: "John Smith",
+      img: "/images/profile2.jpg",
+      blurb: "John leads operations and brings over a decade of rope access experience.",
+    },
+    {
+      name: "Maria Lin",
+      img: "/images/profile3.jpg",
+      blurb: "Maria oversees safety training and co-op coordination.",
+    },
+  ];
 
   const sections: { [key: string]: JSX.Element } = {
-
-   
-      home: (
-  <>
-    <section
-      className="h-[60vh] bg-cover bg-center flex items-center justify-center"
-      style={{ backgroundImage: "url(/images/hero-rope-access.jpg)" }}
-    ></section>
-    <section className="bg-green-100 py-12 px-6 text-center">
-  <h2 className="text-3xl font-bold mb-4">Our Philosophy</h2>
-  <p className="max-w-3xl mx-auto text-lg">
-      At Corda Verte, we believe the best work gets done when everyone has skin in the game.
-
-We're not a faceless corporation. We're a co-op of rope access technicians who care deeply about the quality of our craft—because we own the outcomes. When you hire Corda Verte, you're not just getting a crew—you’re getting partners. People who care about doing the job right because we’re directly invested in the success of the work.
-We know what it’s like to work for companies that treat people like numbers. That’s not us. We created Corda Verte to do things differently: to build something fair, transparent, and excellent—from the ground up.
-We’re building tools that make the job easier, safer, and more efficient. Everyone has a voice, and everything is built around a simple idea:
-If you give people ownership, you get their best.
-
-That’s the Corda Verte difference.'
-      </p>
-    </section>
-  </>
-),
+    home: (
+      <>
+        <section
+          className="h-[60vh] bg-cover bg-center flex items-center justify-center"
+          style={{ backgroundImage: "url(/images/hero-rope-access.jpg)" }}
+        ></section>
+        <section className="bg-green-100 py-12 px-6 text-center">
+          <h2 className="text-3xl font-bold mb-4">Our Philosophy</h2>
+          <p className="max-w-3xl mx-auto text-lg">
+            At Corda Verte, we believe the best work gets done when everyone has skin in the game.
+            We're not a faceless corporation. We're a co-op of rope access technicians who care deeply about the quality of our craft—because we own the outcomes. When you hire Corda Verte, you're not just getting a crew—you're getting partners. People who care about doing the job right because we're directly invested in the success of the work.
+            We know what it's like to work for companies that treat people like numbers. That's not us. We created Corda Verte to do things differently: to build something fair, transparent, and excellent—from the ground up.
+            We're building tools that make the job easier, safer, and more efficient. Everyone has a voice, and everything is built around a simple idea:
+            If you give people ownership, you get their best.
+            That's the Corda Verte difference.
+          </p>
+        </section>
+      </>
+    ),
 
     services: (
       <div className="p-6 md:p-12">
@@ -101,8 +116,7 @@ That’s the Corda Verte difference.'
             <div
               key={profile.name}
               className="bg-white shadow-md rounded-xl p-4 text-center cursor-pointer hover:scale-105 transition-transform"
-              onClick={() => setExpandedProfile(profile as Profile)}
-
+              onClick={() => setExpandedProfile(profile)}
             >
               <img src={profile.img} alt={profile.name} className="w-full h-48 object-cover rounded-md mb-4" />
               <h4 className="text-lg font-semibold">{profile.name}</h4>
@@ -128,15 +142,14 @@ That’s the Corda Verte difference.'
 
   return (
     <main className="min-h-screen bg-white text-gray-900 overflow-hidden">
-   {/* Logo Banner - Updated */}
-<div className="bg-[#181713] text-white flex items-center py-10 px-8">
-  <img src="/images/logo.png" alt="Corda Verte logo" className="h-50 w-auto ml-8 md:ml-16" />
-</div>
-
+      {/* Logo Banner - Updated */}
+      <div className="bg-[#181713] text-white flex items-center py-10 px-8">
+        <img src="/images/logo.png" alt="Corda Verte logo" className="h-50 w-auto ml-8 md:ml-16" />
+      </div>
 
       {/* Nav Bar */}
       <nav className="bg-[#CCE8D5] shadow border-t border-b border-gray-200 sticky top-0 z-10">
-  <ul className="flex justify-center space-x-6 py-3">
+        <ul className="flex justify-center space-x-6 py-3">
           {[
             { label: "Home", id: "home" },
             { label: "Services", id: "services" },
