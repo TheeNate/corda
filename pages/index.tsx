@@ -31,7 +31,8 @@ export default function Home() {
 ];
 
 
-  const sections = {
+  const sections: { [key: string]: JSX.Element } = {
+
    
       home: (
   <>
