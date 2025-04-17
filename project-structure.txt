@@ -1,0 +1,41 @@
+.
+├── next.config.ts
+├── next-env.d.ts
+├── package.json
+├── package-lock.json
+├── pages
+│   ├── api
+│   │   └── hello.ts
+│   ├── _app.tsx
+│   ├── _document.tsx
+│   └── index.tsx
+├── postcss.config.mjs
+├── project-structure.txt
+├── public
+│   ├── favicon.ico
+│   ├── file.svg
+│   ├── globe.svg
+│   ├── images
+│   │   ├── hero-rope-access.jpg
+│   │   ├── inspection.jpg
+│   │   ├── logo.png
+│   │   ├── profile1.jpg
+│   │   ├── radiography.jpg
+│   │   ├── roof.jpg
+│   │   ├── sprinklers.jpg
+│   │   └── ultrasonics.jpg
+│   ├── next.svg
+│   ├── vercel.svg
+│   └── window.svg
+├── README.md
+├── styles
+│   └── globals.css
+├── temp
+│   ├── butterfly.jpg
+│   ├── logo1.png
+│   ├── logo2.1.png
+│   ├── logo2.jpg
+│   └── logo2.png
+└── tsconfig.json
+
+6 directories, 32 files
